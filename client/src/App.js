@@ -6,7 +6,7 @@ class App extends Component {
   constructor(){
     super();
     this.state={
-      data:{}
+      data:[]
     }
   }
   componentDidMount(){
@@ -17,8 +17,17 @@ class App extends Component {
       })
       .catch( err => console.log(err))
   }
+  // pictures = () => {
+  //   const pics = this.state.data;
+  //   console.log(pics)
+  //   const images = pics.filter((pic) => {
+  //     return <img src={pic.url} alt ="pic" />
+  //   })
+  //   console.log(images);
+  //   return images
+  // }
   render() {
-    console.log(this.state.data);
+    console.log('this.state.data', this.state.data);
     return (
       <div className="App">
         <div className="App-header">
@@ -26,9 +35,13 @@ class App extends Component {
           <h2>Welcome to React</h2>
         </div>
         <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
+          Here's some stuff from the postgreSQL db, using express, and react
         </p>
+        {this.state.data.map((pic) => {
+          return <img src={pic.url} alt ="pic" />
+        })}
       </div>
+
     );
   }
 }
