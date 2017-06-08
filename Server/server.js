@@ -13,7 +13,13 @@ const db = pg({
   password: 'password'
 })
 
-server.use(cors());
+// if(process.env.NODE_ENV === 'Development'){
+//   server.use(cors());
+// }
+
+process.env.NODE_ENV === 'Development' && server.use(cors({
+  origin: 'http://localhost:3000'
+}))
 
 server.use(express.static(__dirname + '/public/build'));
 
@@ -24,6 +30,7 @@ server.get('/lol', (req, res) => {
     })
     .catch(function(error){
       console.log('something went wrong');
+      res.status(500).end();
     })
 });
 
