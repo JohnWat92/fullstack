@@ -3,10 +3,22 @@ import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
+  constructor(){
+    super();
+    this.state={
+      data:{}
+    }
+  }
   componentDidMount(){
-
+    fetch('http://localhost:3001/lol')
+      .then(response => response.json())
+      .then((data) => {
+        this.setState({data});
+      })
+      .catch( err => console.log(err))
   }
   render() {
+    console.log(this.state.data);
     return (
       <div className="App">
         <div className="App-header">
