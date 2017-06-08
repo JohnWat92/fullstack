@@ -2,6 +2,7 @@ const express = require('express');
 const server = express();
 const PORT = 3001;
 const pg = require('pg-promise')({});
+
 const cors = require('cors');
 
 const db = pg({
@@ -11,8 +12,10 @@ const db = pg({
   user: 'fullstackuser',
   password: 'password'
 })
+
 server.use(cors());
-server.use(express.static(__dirname + '/client/public/build'));
+
+server.use(express.static(__dirname + '/public/build'));
 
 server.get('/lol', (req, res) => {
   db.any(`SELECT * FROM lol`)
